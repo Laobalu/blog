@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>单例模式模态框</title>
+</head>
+<style>
+  #modal {
+    width: 200px;
+    height: 200px;
+    position: fixed;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, -50%);
+  }
+</style>
+<body>
+  <button id="open1">打开1</button>
+  <button id="open2">打开2</button>
+  <button id="close">关闭</button>
+</body>
+<script>
+  const ModalBox = (function() {
+    let modal = null;
+    return function() {
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = '#modal';
+        document.body.appendChild(modal)
+      }
+      modal.style.display = 'none';
+      modal.innerHTML = 'modal';
+      return modal;
+    }
+  })()
+
+  const open1 = document.getElementById("open1")
+  const open2 = document.getElementById("open2")
+  const close = document.getElementById("close")
+  open1.addEventListener("click", function () {
+    const modal = new ModalBox();
+    modal.style.display = 'block';
+  })
+  open2.addEventListener("click", function () {
+    const modal = new ModalBox();
+    modal.style.display = 'block';
+  })
+  close.addEventListener("click", function () {
+    const modal = new ModalBox();
+    modal.style.display = 'none';
+  })
+</script>
+</html>

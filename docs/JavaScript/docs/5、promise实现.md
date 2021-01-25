@@ -1,3 +1,9 @@
+## promise规范
+[promise A+](https://promisesaplus.com/)  
+[promise A+ 翻译](https://www.ituring.com.cn/article/66566)  
+
+## promise实现
+```js
 const PENDING = 'pending'
 const FULFILLED = 'fulfilled'
 const REJECTED = 'rejected'
@@ -129,3 +135,5 @@ class TPromise {
 }
 
 module.exports = TPromise
+
+```

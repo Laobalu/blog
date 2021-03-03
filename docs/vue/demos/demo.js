@@ -53,10 +53,26 @@ class Sub{
 
 class Vue {
   constructor(options) {
-    this.data = options.data
+    
+    const data = options.data
+    this._data = options.data
+    
+    Object.keys(data).forEach(key => {
+      this.proxy(key)
+    })
     new Sub()
-    observe(this.data)
-    // 每次初始化，新增一个订阅者
+    observe(data)
+  }
+  // 将data数据代理到vue本身上
+  proxy(key) {
+    Object.defineProperty(this, key, {
+      configurable: true,
+      enumerable: true,
+      get: () => this._data[key],
+      set: newVal => {
+        this._data[key] = newVal
+      }
+    })
   }
 }
 
@@ -67,7 +83,7 @@ const a = new Vue({
   }
 })
 // get
-console.log(a.data.name)
+console.log(a.name)
 // set
-a.data.name = 'demo2'
+a.name = 'demo2'
 

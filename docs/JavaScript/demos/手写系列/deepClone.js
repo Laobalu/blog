@@ -19,9 +19,14 @@ const deepClone = (target, map = new WeakMap()) => {
   if (isObject(target)) {
     const copyTarget = Array.isArray(target) ? [] : {}
     map.set(target, copyTarget)
-    Reflect.ownKeys(target).forEach(key => {
-      copyTarget[key] = deepClone(target[key], map)
-    })
+    // Reflect.ownKeys(target).forEach(key => {
+    //   copyTarget[key] = deepClone(target[key], map)
+    // })
+    for(let key in target) {
+      if(target.hasOwnProperty(key)) {
+        copyTarget[key] = deepClone(target[key], map)
+      }
+    }
     return copyTarget
   } else {
     return target
